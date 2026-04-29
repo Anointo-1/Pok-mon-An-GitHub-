@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+ <html>
+  <head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+   <title>Pokémon An</title>
+  </head>
+  <style>
+  body {
+  background: linear-gradient(to bottom, #AAAAAA, #333333);
+  margin: auto;
+  }
+  /* 
+  The screen specs:
+  top: 10px;
+  width: 345px;
+  height: 332px; 
+  */
+  #screen {
+  background-color: #000000;
+  border: solid 3px #000000;
+  width: 345px;
+  height: 332px;
+  margin: auto;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  }
+  
+  #player {
+  width: 25px;
+  height: 25px;
+  background: linear-gradient(to right, skyblue, cyan);
+  border: solid 2px black;
+  position: absolute;
+  border-radius: 4px;
+  z-index: 4;
+  }
+  .remove {
+  position: absolute;
+  bottom: -1000px;
+  }
+  #d-pad {
+  background-color: grey;
+  border: solid 3px #333333;
+  border-radius: 5px;
+  padding: 10px;
+  position: absolute;
+  top: 353px;
+  left: 8px;
+  z-index: 9;
+  }
+  #but-case {
+  background-color: grey;
+  border: solid 3px #333333;
+  border-radius: 50px;
+  width: 150px;
+  padding: 10px;
+  position: absolute;
+  top: 353px;
+  left: 180px;
+  z-index: 9;
+  }
+  #vol-case {
+  background-color: grey;
+  border: solid 3px #333333;
+  border-radius: 50px;
+  width: 150px;
+  height: 30px;
+  padding: 10px;
+  position: absolute;
+  top: 443px;
+  left: 180px;
+  z-index: 9;
+  }
+  #start {
+  color: #000000;
+  background-color: grey;
+  border: solid 3px #333333;
+  border-radius: 50px;
+  width: 100px;
+  padding: 10px;
+  position: absolute;
+  top: 583px;
+  left: 40px;
+  z-index: 10;
+  }
+  #select {
+  color: #000000;
+  background-color: grey;
+  border: solid 3px #333333;
+  border-radius: 50px;
+  width: 100px;
+  padding: 10px;
+  position: absolute;
+  top: 583px;
+  left: 209px;
+  z-index: 10;
+  }
+  #mandoDraw {
+  opacity: 0;
+  position: absolute;
+  top: 100px;
+  width: 345px;
+  }
+  #pokemonTheme {
+  position: absolute;
+  top: -1000px;
+  opacity: 0;
+  }
+  #nameScreen {
+  position: absolute;
+  top: -1000px;
+  }
+  #character {
+  position: absolute;
+  width: 172px;
+  height: 144px;
+  top: 100px;
+  left: 80px;
+  }
+  #nameInput {
+  border: solid 2px white;
+  border-radius: 5px;
+  background-color: cyan;
+  }
+  #genderSelect {
+  border: solid 2px white;
+  border-radius: 5px;
+  background-color: cyan;
+  }
+  #chat-box {
+  position: absolute;
+  top: 250px;
+  left: 20px;
+  display: inline;
+  background-color: white;
+  border: solid 2px black;
+  border-radius: 100px;
+  padding: 5px 15px 5px 15px;
+  width: 300px;
+  height: 70px;
+  z-index: 9;
+  opacity: 0;
+  }
+  #chatBox {
+  padding: 10px;
+  font-size: 20px;
+  }
+  #professorMangrove {
+  position: absolute;
+  top: -1000px;
+  left: 130px;
+  width: 100px;
+  height: 230px;
+  }
+  #playerDraw {
+  position: absolute;
+  top: 50px;
+  left: 110px;
+  width: 140;
+  height: 210;
+  opacity: 0;
+  }
+  #startMenu {
+  position: absolute;
+  border: solid 2px black;
+  background-color: white;
+  border-radius: 5px;
+  padding-right: 20px;
+  top: 20px;
+  right: 10px;
+  opacity: 0;
+  z-index: 9;
+  }
+  #playerCard {
+  position: absolute;
+  right: 30px;
+  top: 30px;
+  border: solid 2px black;
+  border-radius: 5px;
+  padding: 5px 15px 5px 10px;
+  width: 200px;
+  height: 170px;
+  background-color: white;
+  opacity: 0;
+  z-index: 9;
+  }
+  #bagCon {
+    position: absolute;
+    right: 30px;
+    top: 30px;
+    width: 200px;
+    height: 270px;
+    background-color: white;
+    border: solid 2px black;
+    border-radius: 5px;
+    display: none;
+    z-index: 9;
+    overflow: hidden; /* This MUST be hidden so the tabs don't move */
+   }
+
+   #bagScrollZone {
+    height: 230px; /* bagCon height (270) minus the tabs height (~40) */
+    overflow-y: auto;
+    touch-action: pan-y;
+    -webkit-overflow-scrolling: touch;
+    }
+  #bagScrollZone p {
+  margin: 0;
+  padding: 8px 10px;
+  border-bottom: 1px solid #eee; 
+  font-family: monospace;
+  }
+ #hd1 {
+  left: 60px;
+  }
+  #hd2 {
+  left: 225px;
+  }
+  #hd3 {
+  top: 250px;
+  left: 150px;
+  }
+  .hd4 {
+  font-size: 20px;
+  }
+  #nameScreen2 {
+  position: absolute;
+  z-index: 10;
+  top: -1000px;
+  left: 20px;
+  }
+  .d-button, .button {
+  /* Prevents text selection */
+  -webkit-user-select: none;  /* Safari/Chrome */
+  user-select: none;          /* Standard */
+
+  /* Prevents the long-press "save image" or context menu on mobile */
+  -webkit-touch-callout: none;
+  
+  /* Prevents the blue highlight box when tapping on some mobile browsers */
+  -webkit-tap-highlight-color: transparent;
+  
+  /* Ensures buttons don't zoom in on double-tap */
+  touch-action: manipulation;
+}
+  .heading {
+  position: absolute;
+  color: white;
+  }
+  .heading2 {
+  color: white;
+  }
+  .scroll {
+width: 100px;
+height: 100px;
+border: solid 2px black;
+overflow-y: scroll;
+}
+  .button {
+  width: 40px;
+  height: 40px;
+  margin-left: 20px;
+  border: solid 2px #333333;
+  border-radius: 40px;
+  z-index: 10;
+  }
+  .d-button {
+  width: 35px;
+  height: 35px;
+  border: solid 2px #333333;
+  border-radius: 3px;
+  margin: 4px;
+  z-index: 10;
+  }
+  .but-grey {
+  color: #FFFF;
+  }
+  .centre {
+  text-align: center;
+  }
+  </style>
+   <body>
+    <div id="screen">
+     <button id="player"></button>
+     <div id="mainDivEl" style="position: absolute; top: 0px; left: 0px;"></div>
+     <div id="nameScreen">
+      <h1 class="heading" id="hd1">POKÉMON</h1><h1 class="heading" id="hd2">AN</h1>
+      <p class="heading" id="hd3">press start!</p>
+      <img id="character" src="Character-draw.jpg">
+     </div>
+     <div id="startMenu">
+      <ul>
+       <li id="pDex">Pokédex</li>
+       <br>
+       <li id="poke">Pokémon</li>
+       <br>
+       <li id="bag">Bag</li>
+       <br>
+       <li id="playId">Player</li>
+       <br>
+       <li id="save">Save</li>
+       <br>
+       <li id="exit">Exit</li>
+      </ul>
+     </div>
+     <div id="bagCon">
+      <div id="bagTabs" style="display: flex; background: #eee; border: 2px solid black; border-radius: 5px; margin: 3px;">
+        <div id="bagItems" style="flex: 1; text-align: center; padding: 5px; font-weight: bold; color: cyan;">ITEMS</div>
+        <div id="bagKeyItems" style="flex: 1; text-align: center; padding: 5px; border-left: 1px solid black;">KEY</div>
+       </div>
+
+       <div id="bagScrollZone">
+       </div>
+     </div>
+     <div id="playerCard"> 
+     <span><strong>player ID</strong></span><br>
+     <span>Name: <span id="name"></span>,</span><br>
+     <span>Gender: <span></span>,</span><br>
+     <span>Id: <span id="numId"></span>,</span><br>
+     <span>Money: ₱<span id="cash"></span>,</span><br>
+     <span>Time: ,</span><br>
+     <span>Stars: ,</span>
+     <span>Gym: /8</span>
+     </div>
+     <div id="nameScreen2">
+      <h1 class="heading2 hd4">what's your name?</h1>
+      <input id="nameInput" type="text" placeholder="input name..." value=" ">
+      <h1 class="heading2 hd4">Are you a boy or a girl?</h1>
+      <select id="genderSelect">
+      <option value="boy">Boy</option>
+      <option value="girl">Girl</option>
+      <option value="none" selected>None</option>
+      <option value="rand">Random</option>
+      </select>
+      <h1 class="heading2 hd4">Press 'START' to create save!</h1>
+     </div>
+     
+     <audio id="pokemonTheme" loop>
+      <source src="PokemonTheme-rec.mp3" type="audio/mpeg">
+     </audio>
+     <audio id="" loop>
+      <source src="route+lab.mp3" type="audio/mpeg">
+     </audio>
+     <audio id="" loop>
+      <source src="pokemon+Gym.mp3" type="audio/mpeg">
+     </audio>
+     <audio id="" loop>
+      <source src="Pokemon-20th-Anniversary-PokeCenter-rec.mp3" type="audio/mpeg">
+     </audio>
+     <audio id="" loop>
+      <source src="dpp-ultimateBattleMix+radio.mp3" type="audio/mpeg">
+     </audio>
+     <audio id="" loop>
+      <source src="Pokmon-Go-Battle-Wild+GreatBattle.mp3" type="audio/mpeg">
+     </audio>
+     <audio id="" loop>
+      <source src="PokeBattle-rec.mp3" type="audio/mpeg">
+     </audio>
+     <audio id="" loop>
+      <source src="POKEMON-Pokemon-Tower.mp3" type="audio/mpeg">
+     </audio>
+     <audio id="" loop>
+      <source src="Pokemon_Legend+GreatBattle-rec.mp3" type="audio/mpeg">
+     </audio>
+     <audio id="startTown" loop>
+      <source src="PKMN-Littleroot-8bit-rec.mp3" type="audio/mpeg">
+     </audio>
+     <audio id="" loop>
+      <source src="Oraci+town.mp3" type="audio/mpeg">
+     </audio>
+     <audio id="" loop>
+      <source src="poke+cave.mp3" type="audio/mpeg">
+     </audio>
+     
+     <img id="playerDraw" src="Player-draw.jpg">
+     <img id="mandoDraw" src="Mando-draw.jpg">
+     <img id="professorMangrove" src="ProfessorMangrove-draw.jpg">
+     
+     <div id="chat-box">
+      <span id="chatBox">
+       Hello my name is professor mangrove,
+       and welcome to the world of fakemon!
+      </span>
+     </div>
+     
+    </div>
+    
+    <div id="d-pad">
+     <button class="d-button but-grey">.</button> <button id="upBut" class="d-button">↑</button> <button class="d-button but-grey">.</button><br>
+     <button id="leftBut" class="d-button">←</button> <button class="d-button but-grey">.</button> <button id="rightBut" class="d-button">→</button><br>
+     <button class="d-button but-grey">.</button> <button id="downBut" class="d-button">↓</button> <button class="d-button but-grey">.</button><br>
+    </div>
+    
+    <div id="but-case">
+     <button id="aBut"class="button" onclick="A()">A</button> <button id="bBut" class="button" onclick="B()">B</button>
+    </div>
+    
+    <div id="vol-case">
+     <input type="range" id="volume">
+    </div>
+    
+    <button id="start" onclick="start()">START</button>
+    <button id="select" onclick="select()">SELECT</button>
+    
+    <script src="rooms.js"></script>
+    <script src="script.js"></script>
+   </body>
+ </html>
